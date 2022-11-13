@@ -1,9 +1,14 @@
-version: "3.3"
-   
+version: "3.9"
+
 services:
   slam:
-    build: .
-    command: bash start.sh
-    restart: on-failure
-    ports:
-      - "80:80"
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    container_name: slam
+    environment:
+      - CONFIG_FILE_URL=${CONFIG_FILE_URL}
+    volumes:
+      - "/codebase:/codebase"
+      - "/storage:/storage"
+    restart: always
